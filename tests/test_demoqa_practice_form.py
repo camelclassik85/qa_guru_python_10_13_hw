@@ -17,7 +17,7 @@ def test_fill_registration_form():
     registration_page.open()
 
     # accept consent
-    registration_page.accept_consent()
+    registration_page.accept_consent_if_presence()
 
     # WHEN
     registration_page.user_registration(ad)

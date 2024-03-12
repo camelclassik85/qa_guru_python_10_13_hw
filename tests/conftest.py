@@ -1,4 +1,6 @@
 import os
+
+import allure
 import pytest
 from utils import attach
 from selene import browser
@@ -10,6 +12,7 @@ from dotenv import load_dotenv
 DEFAULT_BROWSER_VERSION = '100.0'
 
 
+@allure.step('Select browser version')
 def pytest_addoption(parser):
     parser.addoption(
         '--browser_version',
@@ -17,6 +20,7 @@ def pytest_addoption(parser):
     )
 
 
+@allure.step('Load env')
 @pytest.fixture(scope='session', autouse=True)
 def load_env():
     load_dotenv()

@@ -1,4 +1,7 @@
 from selene import browser, be, have, command
+from selene.core.exceptions import TimeoutException
+from selenium.common import NoSuchElementException
+
 from qa_guru_python_10_10 import resource
 import allure
 from qa_guru_python_10_10.data.users import User, date
@@ -24,8 +27,11 @@ class RegistrationPage:
         browser.open("automation-practice-form")
 
     @allure.step('Accept consent')
-    def accept_consent(self):
-        browser.element('.fc-cta-consent').click()
+    def accept_consent_if_presence(self):
+        try:
+            browser.element('.fc-cta-consent').click()
+        except TimeoutException:
+            print("нет формы с подтверждением")
 
     @allure.step('Fill first name')
     def fill_first_name(self, user: User):
